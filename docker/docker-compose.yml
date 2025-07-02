@@ -1,0 +1,55 @@
+version: "3"
+name: minalan
+services:
+  backend:
+    env_file:
+      - secrets.env
+    image: docker.ub.gu.se/minalan-backend:${GIT_REVISION}
+    ports:
+      - "${BACKEND_HOST_PORT}:4000"
+    environment:
+      KOHA_BASE_URL: "${KOHA_BASE_URL}"
+      KOHA_API_PAYMENT_CALLBACK_URL: "${KOHA_API_PAYMENT_CALLBACK_URL}"
+      KOHA_API_PAYMENT_PORTAL_URL: "${KOHA_API_PAYMENT_PORTAL_URL}"
+      CAS_LOGIN_URL: "${CAS_LOGIN_URL}"
+      CAS_VALIDATE_URL: "${CAS_VALIDATE_URL}"
+      EXTERNAL_TITLE_URL_EN: "${EXTERNAL_TITLE_URL_EN}"
+      EXTERNAL_TITLE_URL_SV: "${EXTERNAL_TITLE_URL_SV}"
+      ALERT_URL: "${ALERT_URL}"
+      ADDRESS_MANDATORY: "${ADDRESS_MANDATORY}"
+      SSO_PROVIDER: "${SSO_PROVIDER}"
+      OAUTH2_CLIENT_ID: "${OAUTH2_CLIENT_ID}"
+      OAUTH2_AUTHORIZE_ENDPOINT: "${OAUTH2_AUTHORIZE_ENDPOINT}"
+      OAUTH2_TOKEN_ENDPOINT: "${OAUTH2_TOKEN_ENDPOINT}"
+      OAUTH2_USER_ENDPOINT: "${OAUTH2_USER_ENDPOINT}"
+      OAUTH2_REDIRECT_URI: "${OAUTH2_REDIRECT_URI}"
+      OAUTH2_SCOPE: "${OAUTH2_SCOPE}"
+      ALLOW_PASSWORD_CHANGE: "${ALLOW_PASSWORD_CHANGE}"
+    restart: always
+    volumes:
+      - "${BACKEND_DATA_PATH}:/app/data"
+  frontend:
+    image: docker.ub.gu.se/minalan-frontend:${GIT_REVISION}
+    ports:
+      - ${FRONTEND_HOST_PORT}:80
+    environment:
+      MYLOANS_BACKEND_URL: "${MYLOANS_BACKEND_URL}"
+      MYLOANS_NOTIFICATION_TIMEOUT: "${MYLOANS_NOTIFICATION_TIMEOUT}"
+      MYLOANS_NOTIFICATION_PROGRESS_BAR: "${MYLOANS_NOTIFICATION_PROGRESS_BAR}"
+      MYLOANS_OAUTH2_CLIENT_ID: "${OAUTH2_CLIENT_ID}"
+      MYLOANS_OAUTH2_AUTHORIZE_ENDPOINT: "${OAUTH2_AUTHORIZE_ENDPOINT}"
+      MYLOANS_OAUTH2_REDIRECT_URI: "${OAUTH2_REDIRECT_URI}"
+      MYLOANS_OAUTH2_SCOPE: "${OAUTH2_SCOPE}"
+    restart: always
+  db:
+    image: postgres:12
+    environment:
+      POSTGRES_USER: "${DB_USER}"
+      POSTGRES_PASSWORD: "${DB_PASSWORD}"
+      POSTGRES_DB: "${DB_NAME}"
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - "${DB_INIT_PATH}:/docker-entrypoint-initdb.d"
+    restart: always
+
+
