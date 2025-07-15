@@ -1,0 +1,23 @@
+---
+GIT_REVISION: '{{ git_revision }}'
+FRONTEND_HOST_PORT: '127.0.0.1:{{ frontend_host_port }}'
+BACKEND_HOST_PORT: '127.0.0.1:{{ backend_host_port}}'
+BACKEND_URL: https://{{ backend_hostname }}
+ENVIRONMENT: production
+
+BACKEND_DATA_PATH: "{{ backend_data_host_dir }}"
+DB_DATA_PATH: "{{ db_data_host_dir }}"
+KOHA_BASE_URL: "{{ koha_base_url }}"
+KOHA_API_PAYMENT_CALLBACK_URL: "{{ koha_base_url }}/cgi-bin/koha/svc/onlinepayment"
+ALERT_URL: "https://{{ backend_hostname }}/setup/alert"
+SHOW_PICKUP_CODE: true
+ADDRESS_MANDATORY: true
+SSO_PROVIDER: GU
+OAUTH2_AUTHORIZE_ENDPOINT: https://idp.auth.gu.se/adfs/oauth2/authorize/
+OAUTH2_TOKEN_ENDPOINT: https://idp.auth.gu.se/adfs/oauth2/token/
+OAUTH2_USER_ENDPOINT: https://idp.auth.gu.se/adfs/userinfo
+OAUTH2_REDIRECT_URI: https://minalan.ub.gu.se/login/GU
+OAUTH2_SCOPE: email
+SHOW_SURVEY_ACCEPTANCE: false
+ALLOW_PASSWORD_CHANGE: true
+KOHA_PWRESET_URL: https://reset.ub.gu.se/api/setpw
