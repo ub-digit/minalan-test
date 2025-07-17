@@ -1,5 +1,5 @@
 ---
-docker_git_revision: master
+docker_git_revision: ansible-deploy
 git_revision: koha-release-2025-001
 frontend_host_port: 30340
 backend_host_port: 30341

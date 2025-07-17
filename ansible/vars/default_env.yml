@@ -2,7 +2,7 @@
 GIT_REVISION: '{{ git_revision }}'
 FRONTEND_HOST_PORT: '127.0.0.1:{{ frontend_host_port }}'
 BACKEND_HOST_PORT: '127.0.0.1:{{ backend_host_port}}'
-BACKEND_URL: https://{{ backend_hostname }}
+MYLOANS_BACKEND_URL: https://{{ backend_hostname }}
 ENVIRONMENT: production
 
 BACKEND_DATA_PATH: "{{ backend_data_host_dir }}"
