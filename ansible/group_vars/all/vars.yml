@@ -2,3 +2,14 @@
 docker_git_repo_url: https://github.com/ub-digit/minalan-test.git
 docker_directory: './docker' # Default is './docker'
 app_name: minalan
+
+data_dir: /data/minalan
+data_dirs:
+  backend:
+    path: /data/minalan/locale
+  db:
+    path: /data/minalan/database
+    owner: 999
+    group: 999
+    push: false
+    pull: false
